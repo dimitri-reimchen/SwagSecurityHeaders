@@ -4,6 +4,7 @@
 Dieses Plugin erweitert die Sicherheit Ihres Shopware 6 Shops durch die **dynamische Konfiguration von Sicherheitsheadern**.  
 Es bietet eine flexible Lösung zum Schutz vor verschiedenen Risiken moderner Webanwendungen – ideal auch zur Vorbereitung auf Penetrationstests und regelmäßige Wartungsarbeiten.
 
+Hinweis: Befindet sich der Shopware 6 Shop im Wartungsmodus, können bestimmte sicherheitsrelevante HTTP-Header fehlen, was potenzielle Angriffsflächen wie Clickjacking oder Content-Injection eröffnet. Dieses Plugin stellt sicher, dass auch im Wartungsmodus wichtige Sicherheitsheader wie Content-Security-Policy oder X-Frame-Options korrekt gesetzt werden.
 ---
 
 ## ✨ Funktionen
