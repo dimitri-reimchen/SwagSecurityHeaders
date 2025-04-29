@@ -1,63 +1,126 @@
-# Shopware 6 Security Headers Plugin
 
-Dieses Plugin verbessert die Sicherheit Ihres Shopware 6 Shops durch Hinzufügen zusätzlicher Sicherheitsheader zu den standardmäßigen Shopware-Headern. Die Header sind über die Administration konfigurierbar und werden auf alle Antworten des Storefronts angewendet.
+# 🛡️ Shopware 6 Security Headers Plugin
 
-## Funktionen
+Dieses Plugin erweitert die Sicherheit Ihres Shopware 6 Shops durch die **dynamische Konfiguration von Sicherheitsheadern**.  
+Es bietet eine flexible Lösung zum Schutz vor verschiedenen Risiken moderner Webanwendungen – ideal auch zur Vorbereitung auf Penetrationstests und regelmäßige Wartungsarbeiten.
 
-Das Plugin ermöglicht die Konfiguration folgender Sicherheitsheader:
+---
 
-### Content-Security-Policy (CSP)
+## ✨ Funktionen
 
-Dieser Header hilft, Cross-Site-Scripting (XSS), Clickjacking und andere Code-Injection-Angriffe zu verhindern. Content Security Policy (CSP) kann zulässige Ursprünge für Inhalte festlegen, einschließlich Skripte, Stylesheets, Bilder, Schriftarten, Objekte, Medien (Audio, Video), iFrames und mehr.
+### 1. Content-Security-Policy (CSP)
+- Verhinderung von Cross-Site-Scripting (XSS)
+- Schutz vor Code-Injection-Angriffen
+- Granulare Kontrolle über erlaubte Inhaltsquellen
 
-**Beispiel:** `default-src 'self' 'unsafe-inline' *; base-uri 'self';`
+**Beispiel:**
+```
+default-src 'self' 'unsafe-inline';
+script-src 'self' https://trusted-cdn.com;
+style-src 'self' https://fonts.googleapis.com;
+```
 
-### Content-Security-Policy-Report-Only
+### 2. Content-Security-Policy-Report-Only
+- Sicheres Testen neuer CSP-Konfigurationen
+- Überwachung potenzieller Sicherheitsverletzungen ohne direkte Durchsetzung
+- Ideal zur Vorbereitung neuer Richtlinien bei Wartungsarbeiten
 
-Dieses Header-Feld ermöglicht es Webentwicklern, mit Richtlinien zu experimentieren, indem sie deren Auswirkungen überwachen (aber nicht erzwingen). Diese Richtlinie wird in den Nur-Bericht-Modus versetzt. Dies eignet sich hervorragend, um eine neue Richtlinie zu testen oder eine bestehende CSP-Richtlinie zu ändern, ohne dass etwas kaputt geht.
+**Beispiel:**
+```
+default-src https:;
+report-uri /csp-violation-report-endpoint/;
+```
 
-**Beispiel:** `default-src https:; report-uri /csp-violation-report-endpoint/`
+### 3. Permissions-Policy
+- Kontrolle über Browser-APIs und Funktionen
+- Einschränkung potenziell sensibler Browserfeatures
+- Schutz vor ungewollten Berechtigungen
 
-### Permissions-Policy
+**Beispiel:**
+```
+camera=(),
+microphone=(),
+geolocation=(),
+interest-cohort=()
+```
 
-Mit diesem Header können Sie steuern, welche Funktionen und APIs im Browser verwendet werden können. Er hieß zuvor Feature-Policy.
+---
 
-**Beispiel:** `camera=(), microphone=(), geolocation=(), interest-cohort=()`
+## 🚀 Installation
 
-## Installation
+### Methode 1: Über die Kommandozeile
+```bash
+# Plugin-Ordner kopieren
+cp -R SwagSecurityHeaders custom/plugins/
 
-1. Kopieren Sie den Ordner `SwagSecurityHeaders` in das Verzeichnis `custom/plugins` Ihrer Shopware 6 Installation
-2. Installieren Sie das Plugin über die Kommandozeile oder die Administration:
-   ```bash
-   bin/console plugin:refresh
-   bin/console plugin:install --activate SwagSecurityHeaders
-   ```
-3. Leeren Sie den Cache:
-   ```bash
-   bin/console cache:clear
-   ```
+# Plugin installieren und aktivieren
+bin/console plugin:refresh
+bin/console plugin:install --activate SwagSecurityHeaders
+bin/console cache:clear
+```
 
-## Konfiguration
+### Methode 2: Über die Administration
+1. Navigieren Sie zu **Einstellungen > System > Plugins**.
+2. Klicken Sie auf **"Plugin hochladen"**.
+3. Wählen Sie die ZIP-Datei.
+4. Installieren und aktivieren Sie das Plugin.
 
-Nach der Installation können Sie das Plugin in der Shopware Administration konfigurieren:
+---
 
-1. Navigieren Sie zu **Einstellungen > System > Plugins**
-2. Suchen Sie nach "Security Headers" und klicken Sie auf "Konfigurieren"
-3. Aktivieren Sie die gewünschten Header und passen Sie deren Werte an Ihre Bedürfnisse an
-4. Speichern Sie die Konfiguration
+## 🔧 Konfiguration
 
-## Überprüfung
+- Navigieren Sie zu **Einstellungen > System > Plugins**.
+- Suchen Sie **"Security Headers"**.
+- Klicken Sie auf **"Konfigurieren"**.
+- Aktivieren und konfigurieren Sie die gewünschten Header individuell.
+- Speichern Sie die Einstellungen.
 
-Um die Wirksamkeit der konfigurierten Sicherheitsheader zu überprüfen, können Sie Ihre Website auf [securityheaders.com](https://securityheaders.com) testen. Geben Sie einfach die URL Ihres Shops ein und prüfen Sie die Bewertung.
+---
 
-## Technische Details
+## 🕵️ Sicherheitsüberprüfung
 
-Das Plugin verwendet einen Event-Subscriber, der auf das `KernelEvents::RESPONSE`-Event reagiert, um die konfigurierten Sicherheitsheader zu den HTTP-Antworten hinzuzufügen. Die Header werden nur hinzugefügt, wenn sie nicht bereits in der Antwort vorhanden sind, um Konflikte mit anderen Plugins oder der Shopware-Kernfunktionalität zu vermeiden.
+Nutzen Sie die folgenden Tools zur Überprüfung Ihrer Header-Konfiguration:
+- [securityheaders.com](https://securityheaders.com/)
+- [Mozilla Observatory](https://observatory.mozilla.org/)
 
-## Kompatibilität
+---
 
-Das Plugin ist kompatibel mit Shopware 6.6.0.0 und höher.
+## 🔬 Technische Implementierung
 
-## Lizenz
+- Nutzung eines **Event-Subscribers** auf `KernelEvents::RESPONSE`
+- **Dynamisches Hinzufügen** der Header zu HTTP-Antworten
+- **Vermeidung von Konflikten** mit anderen Plugins oder Core-Funktionen
 
-MIT-Lizenz
+---
+
+## 🔒 Sicherheitshinweise
+
+- **Regelmäßige Überprüfung** und **Anpassung der Header** empfohlen
+- **Änderungen zuerst im Report-Only-Modus testen**
+- **Berücksichtigung spezifischer Anforderungen** Ihrer Shop-Umgebung
+- Unterstützt Wartungs- und Optimierungsmaßnahmen durch flexibles Management der Header
+
+---
+
+## 🔗 Kompatibilität
+
+- **Shopware:** ab Version **6.6.0.0**
+- **PHP:** ab Version **8.1**
+
+---
+
+## 📄 Lizenz
+
+Dieses Plugin ist unter der [MIT-Lizenz](LICENSE) veröffentlicht.
+
+---
+
+## 🤝 Beitrag und Unterstützung
+
+- Fehler gefunden oder Verbesserungsvorschläge?  
+→ **Erstellen Sie ein Issue oder einen Pull Request** auf GitHub.
+
+---
+
+**Hinweis:**  
+Dieses Plugin stellt einen wichtigen Beitrag zur Härtung Ihres Shops dar, ersetzt aber keine vollständige Sicherheitsstrategie.
