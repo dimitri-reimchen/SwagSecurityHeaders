@@ -50,7 +50,6 @@ class SecurityHeaderSubscriber implements EventSubscriberInterface
             $this->headerService->addSecurityHeaders($response, $this->systemConfigService, $salesChannelId);
         } catch (\Exception $e) {
             // Fehler protokollieren, aber den Request nicht abbrechen
-            // Im Produktionsbetrieb solltest du hier einen echten Logger verwenden
             error_log('SecurityHeaders Plugin Error: ' . $e->getMessage());
         }
     }
