@@ -1,0 +1,31 @@
+{
+    "name": "swag/security-headers",
+    "description": "Security Headers Plugin für Shopware 6",
+    "version": "1.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dimitri Reimchen"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "Swag\\SecurityHeaders\\SwagSecurityHeaders",
+        "label": {
+            "de-DE": "Security Headers",
+            "en-GB": "Security Headers"
+        },
+        "description": {
+            "de-DE": "Verbessert die Sicherheit durch Hinzufügen zusätzlicher Sicherheitsheader zu den standardmäßigen Shopware-Headern.",
+            "en-GB": "Improves security by adding extra security headers on top of the default Shopware ones."
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Swag\\SecurityHeaders\\": "src/"
+        }
+    }
+}

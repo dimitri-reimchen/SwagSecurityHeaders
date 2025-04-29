@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Content-Security-Policy</title>
+        <input-field type="bool">
+            <name>cspEnabled</name>
+            <label>Aktivieren</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="textarea">
+            <name>cspValue</name>
+            <label>CSP-Wert</label>
+            <defaultValue>Content-Security-Policy: default-src 'self';script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;img-src 'self' data: https:;font-src 'self' https://fonts.gstatic.com data:;connect-src 'self';object-src 'none';base-uri 'self';frame-ancestors 'none';</defaultValue>
+            <helpText>Beispiel: default-src 'self' 'unsafe-inline' *; base-uri 'self';</helpText>
+        </input-field>
+    </card>
+    <card>
+        <title>Content-Security-Policy-Report-Only</title>
+        <input-field type="bool">
+            <name>cspReportOnlyEnabled</name>
+            <label>Aktivieren</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="textarea">
+            <name>cspReportOnlyValue</name>
+            <label>CSP-Report-Only-Wert</label>
+            <defaultValue>default-src https:; report-uri /csp-violation-report-endpoint/</defaultValue>
+            <helpText>Beispiel: default-src https:; report-uri /csp-violation-report-endpoint/</helpText>
+        </input-field>
+    </card>
+    <card>
+        <title>Permissions-Policy</title>
+        <input-field type="bool">
+            <name>permissionsPolicyEnabled</name>
+            <label>Aktivieren</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="textarea">
+            <name>permissionsPolicyValue</name>
+            <label>Permissions-Policy-Wert</label>
+            <defaultValue>camera=() , microphone=(), geolocation=(), interest-cohort=()</defaultValue>
+            <helpText>Beispiel: camera=(), microphone=(), geolocation=(), interest-cohort=()</helpText>
+        </input-field>
+    </card>
+    
+    <!-- NEUE HEADER -->
+    <card>
+        <title>Strict-Transport-Security (HSTS)</title>
+        <input-field type="bool">
+            <name>hstsEnabled</name>
+            <label>Aktivieren</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>hstsValue</name>
+            <label>HSTS-Wert</label>
+            <defaultValue>max-age=31536000; includeSubDomains; preload</defaultValue>
+            <helpText>Standard: max-age=31536000; includeSubDomains; preload</helpText>
+        </input-field>
+    </card>
+    <card>
+        <title>X-Frame-Options</title>
+        <input-field type="bool">
+            <name>xFrameOptionsEnabled</name>
+            <label>Aktivieren</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <!-- KORRIGIERT: type="single-select" statt "select" -->
+        <input-field type="single-select">
+            <name>xFrameOptionsValue</name>
+            <label>X-Frame-Options-Wert</label>
+            <defaultValue>SAMEORIGIN</defaultValue>
+            <options>
+                <option>
+                    <id>DENY</id>
+                    <name>DENY</name>
+                </option>
+                <option>
+                    <id>SAMEORIGIN</id>
+                    <name>SAMEORIGIN</name>
+                </option>
+            </options>
+        </input-field>
+    </card>
+    <card>
+        <title>X-Content-Type-Options</title>
+        <input-field type="bool">
+            <name>xContentTypeOptionsEnabled</name>
+            <label>Aktivieren</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>xContentTypeOptionsValue</name>
+            <label>X-Content-Type-Options-Wert</label>
+            <defaultValue>nosniff</defaultValue>
+            <disabled>true</disabled> <!-- Es gibt nur 'nosniff' -->
+        </input-field>
+    </card>
+    <card>
+        <title>Referrer-Policy</title>
+        <input-field type="bool">
+            <name>referrerPolicyEnabled</name>
+            <label>Aktivieren</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <!-- KORRIGIERT: type="single-select" statt "select" -->
+        <input-field type="single-select">
+            <name>referrerPolicyValue</name>
+            <label>Referrer-Policy-Wert</label>
+            <defaultValue>strict-origin-when-cross-origin</defaultValue>
+            <options>
+                <option><id>no-referrer</id><name>no-referrer</name></option>
+                <option><id>no-referrer-when-downgrade</id><name>no-referrer-when-downgrade</name></option>
+                <option><id>origin</id><name>origin</name></option>
+                <option><id>origin-when-cross-origin</id><name>origin-when-cross-origin</name></option>
+                <option><id>same-origin</id><name>same-origin</name></option>
+                <option><id>strict-origin</id><name>strict-origin</name></option>
+                <option><id>strict-origin-when-cross-origin</id><name>strict-origin-when-cross-origin</name></option>
+                <option><id>unsafe-url</id><name>unsafe-url</name></option>
+            </options>
+        </input-field>
+    </card>
+</config>
