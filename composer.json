@@ -1,0 +1,32 @@
+{
+    "name": "ecomsec/security-headers",
+    "description": "Security Headers Plugin for Shopware 6 - Adds essential security headers to protect your shop",
+    "version": "1.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dimitri Reimchen",
+            "email": "contact@ecomsec.io"
+        }
+    ],
+    "require": {
+        "shopware/core": ">=6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "EcomSec\\SecurityHeaders\\EcomSecSecurityHeaders",
+        "label": {
+            "de-DE": "EcomSec Security Headers",
+            "en-GB": "EcomSec Security Headers"
+        },
+        "description": {
+            "de-DE": "Verbessert die Sicherheit durch Hinzufügen zusätzlicher Sicherheitsheader zu den standardmäßigen Shopware-Headern.",
+            "en-GB": "Improves security by adding extra security headers on top of the default Shopware ones."
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "EcomSec\\SecurityHeaders\\": "src/"
+        }
+    }
+}
